@@ -151,6 +151,7 @@
     <ClInclude Include="FieldPlayer.h" />
     <ClInclude Include="FieldPlayerStates.h" />
     <ClInclude Include="Goal.h" />
+    <ClInclude Include="Goalkeeper.h" />
     <ClInclude Include="ParamLoader.h" />
     <ClInclude Include="PlayerBase.h" />
     <ClInclude Include="SoccerBall.h" />

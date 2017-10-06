@@ -51,6 +51,9 @@
     <ClInclude Include="FieldPlayerStates.h">
       <Filter>File di intestazione</Filter>
     </ClInclude>
+    <ClInclude Include="Goalkeeper.h">
+      <Filter>File di intestazione</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SoccerPitch.cpp">
