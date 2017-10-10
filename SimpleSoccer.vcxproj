@@ -152,6 +152,7 @@
     <ClInclude Include="FieldPlayerStates.h" />
     <ClInclude Include="Goal.h" />
     <ClInclude Include="Goalkeeper.h" />
+    <ClInclude Include="GoalkeeperStates.h" />
     <ClInclude Include="ParamLoader.h" />
     <ClInclude Include="PlayerBase.h" />
     <ClInclude Include="SoccerBall.h" />
@@ -160,9 +161,12 @@
     <ClInclude Include="SoccerTeam.h" />
     <ClInclude Include="SteeringBehaviors.h" />
     <ClInclude Include="SupportSpotCalculator.h" />
+    <ClInclude Include="TeamStates.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="FieldPlayerStates.cpp" />
+    <ClCompile Include="Goalkeeper.cpp" />
+    <ClCompile Include="GoalkeeperStates.cpp" />
     <ClCompile Include="ParamLoader.cpp" />
     <ClCompile Include="PlayerBase.cpp" />
     <ClCompile Include="SoccerBall.cpp" />
@@ -171,6 +175,7 @@
     <ClCompile Include="SoccerTeam.cpp" />
     <ClCompile Include="SteeringBehaviors.cpp" />
     <ClCompile Include="SupportSpotCalculator.cpp" />
+    <ClCompile Include="TeamStates.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
