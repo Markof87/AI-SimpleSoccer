@@ -44,7 +44,7 @@ public:
 	//Accessor methods
 	Vector2D Center()const { return m_vCenter; }
 	Vector2D Facing()const { return m_vFacing; }
-	Vector2D LeftoPost()const { return m_vLeftPost; }
+	Vector2D LeftPost()const { return m_vLeftPost; }
 	Vector2D RightPost()const { return m_vRightPost; }
 
 	int NumGoalsScored()const { return m_iNumGoalsScored; }
