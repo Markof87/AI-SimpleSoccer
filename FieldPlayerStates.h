@@ -53,42 +53,6 @@ public:
 };
 
 //------------------------------------------------------------------------
-class Dribble : public State<FieldPlayer> {
-
-private:
-	Dribble() {}
-
-public:
-	//Singleton
-	static Dribble* Instance();
-
-	void Enter(FieldPlayer* player) {}
-	void Execute(FieldPlayer* player) {}
-	void Exit(FieldPlayer* player) {}
-
-	bool OnMessage(FieldPlayer*, const Telegram&) { return false; }
-
-};
-
-//------------------------------------------------------------------------
-class ReturnToHomeRegion : public State<FieldPlayer> {
-
-private:
-	ReturnToHomeRegion() {}
-
-public:
-	//Singleton
-	static ReturnToHomeRegion* Instance();
-
-	void Enter(FieldPlayer* player) {}
-	void Execute(FieldPlayer* player) {}
-	void Exit(FieldPlayer* player) {}
-
-	bool OnMessage(FieldPlayer*, const Telegram&) { return false; }
-
-};
-
-//------------------------------------------------------------------------
 class Wait : public State<FieldPlayer> {
 
 private:
@@ -97,24 +61,6 @@ private:
 public:
 	//Singleton
 	static Wait* Instance();
-
-	void Enter(FieldPlayer* player) {}
-	void Execute(FieldPlayer* player) {}
-	void Exit(FieldPlayer* player) {}
-
-	bool OnMessage(FieldPlayer*, const Telegram&) { return false; }
-
-};
-
-//------------------------------------------------------------------------
-class KickBall : public State<FieldPlayer> {
-
-private:
-	KickBall() {}
-
-public:
-	//Singleton
-	static KickBall* Instance();
 
 	void Enter(FieldPlayer* player) {}
 	void Execute(FieldPlayer* player) {}
@@ -143,6 +89,42 @@ public:
 };
 
 //------------------------------------------------------------------------
+class KickBall : public State<FieldPlayer> {
+
+private:
+	KickBall() {}
+
+public:
+	//Singleton
+	static KickBall* Instance();
+
+	void Enter(FieldPlayer* player) {}
+	void Execute(FieldPlayer* player) {}
+	void Exit(FieldPlayer* player) {}
+
+	bool OnMessage(FieldPlayer*, const Telegram&) { return false; }
+
+};
+
+//------------------------------------------------------------------------
+class Dribble : public State<FieldPlayer> {
+
+private:
+	Dribble() {}
+
+public:
+	//Singleton
+	static Dribble* Instance();
+
+	void Enter(FieldPlayer* player) {}
+	void Execute(FieldPlayer* player) {}
+	void Exit(FieldPlayer* player) {}
+
+	bool OnMessage(FieldPlayer*, const Telegram&) { return false; }
+
+};
+
+//------------------------------------------------------------------------
 class SupportAttacker : public State<FieldPlayer> {
 
 private:
@@ -151,6 +133,24 @@ private:
 public:
 	//Singleton
 	static SupportAttacker* Instance();
+
+	void Enter(FieldPlayer* player) {}
+	void Execute(FieldPlayer* player) {}
+	void Exit(FieldPlayer* player) {}
+
+	bool OnMessage(FieldPlayer*, const Telegram&) { return false; }
+
+};
+
+//------------------------------------------------------------------------
+class ReturnToHomeRegion : public State<FieldPlayer> {
+
+private:
+	ReturnToHomeRegion() {}
+
+public:
+	//Singleton
+	static ReturnToHomeRegion* Instance();
 
 	void Enter(FieldPlayer* player) {}
 	void Execute(FieldPlayer* player) {}

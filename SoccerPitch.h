@@ -17,7 +17,7 @@
 
 #include "constants.h"
 #include "2D/Vector2D.h"
-#include "2D/Vector2D.h"
+#include "2D/Wall2D.h"
 
 class Region;
 class Goal;
@@ -71,6 +71,7 @@ public:
 	void TogglePause() { m_bPaused = !m_bPaused; }
 	bool Paused()const { return m_bPaused; }
 
+	//Various getters and setters
 	int cxClient()const { return m_cxClient; }
 	int cyClient()const { return m_cyClient; }
 

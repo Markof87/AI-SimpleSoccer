@@ -63,7 +63,7 @@ void FieldPlayer::Update() {
 	}
 
 	//The steering force's side component is a force that rotates the player about its axis.
-	//We must limit the rotation so that a plyaer can only turn by PlayerMaxTurnRate rads per update.
+	//We must limit the rotation so that a player can only turn by PlayerMaxTurnRate rads per update.
 	double TurningForce = m_pSteering->SideComponent();
 
 	Clamp(TurningForce, -Prm.PlayerMaxTurnRate, Prm.PlayerMaxTurnRate);
@@ -90,7 +90,7 @@ void FieldPlayer::Update() {
 	m_vPosition += m_vVelocity;
 
 	//Enforce a non-penetration constraint if desided.
-	if (Prm.bNonPenetrationConstraint) EnforceNonPenetrationConstraint(this, AutoList<PlayerBase>::GetAllMembers());
+	if (Prm.bNonPenetrationConstraint) EnforceNonPenetrationContraint(this, AutoList<PlayerBase>::GetAllMembers());
 
 }
 

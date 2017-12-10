@@ -16,52 +16,36 @@ void ChangePlayerHomeRegions(SoccerTeam* team, const int NewRegions[TeamSize]) {
 
 }
 
-//ATTACKING
-Attacking* Attacking::Instance() {
+//KICKOFF
+PrepareForKickOff* PrepareForKickOff::Instance() {
 
-	static Attacking instance;
+	static PrepareForKickOff instance;
 	return &instance;
 
 }
 
-void Attacking::Enter(SoccerTeam* team) {
+void PrepareForKickOff::Enter(SoccerTeam* team) {
 
-	#ifdef DEBUG_TEAM_STATES
-		debug_con << team->Name() << " entering Attacking state" << "";
-	#endif
-	
-	//These define the home regions for this state of each of the players.
-	const int BlueRegions[TeamSize] = { 1,12,14,6,4 };
-	const int RedRegions[TeamSize] = { 16,3,5,9,13 };
-
-	//Setup the player's home regions.
-	if (team->Color() == SoccerTeam::blue) ChangePlayerHomeRegions(team, BlueRegions);
-	else ChangePlayerHomeRegions(team, RedRegions);
-
-	//If a player is in either the Wait or ReturnToHomeRegion states, its steering target must be updated
-	//to that of its new home region to enable it to move into the correct position.
-	team->UpdateTargetsOfWaitingPlayers();
-
-}
-
-void Attacking::Execute(SoccerTeam* team) {
-
-	//If this team is no longer in control change states
-	if (!team->InControl()) {
-		team->GetFSM()->ChangeState(Defending::Instance());
-		return;
-	}
-
-	//Calculate the best position for any supporting attacker to move to.
-	team->DetermineBestSupportingPosition();
-
-}
-
-void Attacking::Exit(SoccerTeam* team) {
-
-	//There is no supporting player for defense.
+	//Reset key player pointers.
+	team->SetControllingPlayer(NULL);
 	team->SetSupportingPlayer(NULL);
+	team->SetReceiver(NULL);
+	team->SetPlayerClosestToBall(NULL);
 
+	//Send Msg_GoHome to each player.
+	team->ReturnAllFieldPlayersToHome();
+
+}
+
+void PrepareForKickOff::Execute(SoccerTeam* team) {
+
+	//If both teams in position, start the game.
+	if (team->AllPlayersAtHome() && team->Opponents()->AllPlayersAtHome()) team->GetFSM()->ChangeState(Defending::Instance());
+
+}
+
+void PrepareForKickOff::Exit(SoccerTeam* team) {
+	team->Pitch()->SetGameOn();
 }
 
 //DEFENDING
@@ -104,34 +88,50 @@ void Defending::Execute(SoccerTeam* team) {
 
 void Defending::Exit(SoccerTeam* team) {}
 
-//KICKOFF
-PrepareForKickOff* PrepareForKickOff::Instance() {
+//ATTACKING
+Attacking* Attacking::Instance() {
 
-	static PrepareForKickOff instance;
+	static Attacking instance;
 	return &instance;
 
 }
 
-void PrepareForKickOff::Enter(SoccerTeam* team) {
+void Attacking::Enter(SoccerTeam* team) {
 
-	//Reset key player pointers.
-	team->SetControllingPlayer(NULL);
+#ifdef DEBUG_TEAM_STATES
+	debug_con << team->Name() << " entering Attacking state" << "";
+#endif
+
+	//These define the home regions for this state of each of the players.
+	const int BlueRegions[TeamSize] = { 1,12,14,6,4 };
+	const int RedRegions[TeamSize] = { 16,3,5,9,13 };
+
+	//Setup the player's home regions.
+	if (team->Color() == SoccerTeam::blue) ChangePlayerHomeRegions(team, BlueRegions);
+	else ChangePlayerHomeRegions(team, RedRegions);
+
+	//If a player is in either the Wait or ReturnToHomeRegion states, its steering target must be updated
+	//to that of its new home region to enable it to move into the correct position.
+	team->UpdateTargetsOfWaitingPlayers();
+
+}
+
+void Attacking::Execute(SoccerTeam* team) {
+
+	//If this team is no longer in control change states
+	if (!team->InControl()) {
+		team->GetFSM()->ChangeState(Defending::Instance());
+		return;
+	}
+
+	//Calculate the best position for any supporting attacker to move to.
+	team->DetermineBestSupportingPosition();
+
+}
+
+void Attacking::Exit(SoccerTeam* team) {
+
+	//There is no supporting player for defense.
 	team->SetSupportingPlayer(NULL);
-	team->SetReceiver(NULL);
-	team->SetPlayerClosestToBall(NULL);
 
-	//Send Msg_GoHome to each player.
-	team->ReturnAllFieldPlayersToHome();
-
-}
-
-void PrepareForKickOff::Execute(SoccerTeam* team) {
-
-	//If both teams in position, start the game.
-	if (team->AllPlayersAtHome() && team->Opponents()->AllPlayersAtHome()) team->GetFSM()->ChangeState(Defending::Instance());
-
-}
-
-void PrepareForKickOff::Exit(SoccerTeam* team) {
-	team->Pitch()->SetGameOn();
 }

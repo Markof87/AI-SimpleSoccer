@@ -49,10 +49,19 @@ private:
 	//A pointer to the opposing team.
 	SoccerTeam* m_pOpponents;
 
-	//Pointers to 'key' players.
+	//Pointers to 'key' players:
+
+	//The player who is in command of the soccer ball.
 	PlayerBase* m_pControllingPlayer;
+
+	//When a player gains control of the ball, the team will designate a supporting player, that will attempt to move into
+	//a useful position farther upfield from the attacker.
 	PlayerBase* m_pSupportingPlayer;
+
+	//When a player kicks the ball toward another player, the player waiting to receive the ball is the receiver.
 	PlayerBase* m_pReceivingPlayer;
+
+	//The team member who is currently closest to the ball.
 	PlayerBase* m_pPlayerClosestToBall;
 
 	//The squared distance the closest player is from the ball.

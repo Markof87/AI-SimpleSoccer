@@ -5,100 +5,6 @@
 #include "ParamLoader.h"
 #include "SoccerBall.h"
 
-//---------------------------------AddNoiseToKick-----------------------------------
-//
-// This can be used to vary the accuracy of a player's kick. Just call it prior to kicking
-// the ball using the ball's position and the ball target as parameters.
-//
-//-----------------------------------------------------------------------------------
-Vector2D AddNoiseToKick(Vector2D BallPos, Vector2D BallTarget) {
-
-	double displacement = (Pi - Pi * Prm.PlayerKickingAccuracy) * RandomClamped();
-	Vector2D toTarget = BallTarget - BallPos;
-	Vec2DRotateAroundOrigin(toTarget, displacement);
-	return toTarget + BallPos;
-
-}
-
-//--------------------------------------Kick---------------------------------------
-//
-// Applies a force to the ball in the direction of heading. Truncates the new 
-// velocity to make sure it doesn't exceed the max allowable.
-//
-//----------------------------------------------------------------------------------
-void SoccerBall::Kick(Vector2D direction, double force) {
-
-	//Ensure direction is normalized
-	direction.Normalize();
-
-	//Calculate the acceleration
-	Vector2D acceleration = (direction * force) / m_dMass;
-
-	//Update the velocity
-	m_vVelocity = acceleration;
-
-}
-
-//-------------------------------------Update--------------------------------------
-//
-// Updates the ball physics, tests for any collisions and adjusts the ball's velocity accordingly
-//
-//----------------------------------------------------------------------------------
-void SoccerBall::Update() {
-
-	//Keep a record of the old position so the goal::scored method can used it for goal testing
-	m_vOldPos = m_vPosition;
-
-	//Tests for collisions
-	TestCollisionWithWalls(m_PitchBoundary);
-
-	//Simulate Prm.Friction. Make sure the speed is positive
-	if (m_vVelocity.LengthSq() > Prm.Friction * Prm.Friction) {
-
-		m_vVelocity += Vec2DNormalize(m_vVelocity) * Prm.Friction;
-		m_vPosition += m_vVelocity;
-
-		//Update heading
-		m_vHeading = Vec2DNormalize(m_vVelocity);
-
-	}
-
-}
-
-//-------------------------------TimeToCoverDistance-------------------------------
-//
-// Given a force and a distance to cover given by two vectors, this method calculates
-// how long it will take the ball to travel between the two points
-//
-//----------------------------------------------------------------------------------
-double SoccerBall::TimeToCoverDistance(Vector2D A, Vector2D B, double force)const {
-
-	//This will be the velocity of the ball in the next time step IF the player was to make the pass.
-	double speed = force / m_dMass;
-
-	//Calculates the velocity at B using the equation
-	//
-	//v^2 = u^2 + 2as
-	
-	//First calculate s (distance between the two positions)
-	double DistanceToCover = Vec2DDistance(A, B);
-	double term = speed * speed + 2.0 * DistanceToCover * Prm.Friction;
-
-	//If (u^2 + 2as) is negative it means the ball cannot reach point B.
-	if (term <= 0.0) return -1.0;
-
-	double v = sqrt(term);
-
-	//It is possible for the ball to reach B and we know its speed when it gets there,
-	//so now it's easy to calculate the time using the equation:
-	//
-	// t = v - u
-	//     -----
-	//       a
-	return (v - speed) / Prm.Friction;
-
-}
-
 //---------------------------------FuturePosition----------------------------------
 //
 // Given a time this method returns the ball position at that time in the future.
@@ -123,20 +29,37 @@ Vector2D SoccerBall::FuturePosition(double time)const {
 
 }
 
-//-------------------------------------Render--------------------------------------
+//-------------------------------TimeToCoverDistance-------------------------------
 //
-// Renders the ball
+// Given a force and a distance to cover given by two vectors, this method calculates
+// how long it will take the ball to travel between the two points
 //
 //----------------------------------------------------------------------------------
-void SoccerBall::Render() {
+double SoccerBall::TimeToCoverDistance(Vector2D A, Vector2D B, double force)const {
 
-	gdi->BlackBrush();
-	gdi->Circle(m_vPosition, m_dBoundingRadius);
+	//This will be the velocity of the ball in the next time step IF the player was to make the pass.
+	double speed = force / m_dMass;
 
-	/*
-	gdi->GreenBush();
-	for (int i = 0; i < IPPoints.size(); ++i) gdi->Circle(IPPoints[i], 3);
-	*/
+	//Calculates the velocity at B using the equation:
+	//
+	//v^2 = u^2 + 2as
+	
+	//First calculate s (distance between the two positions)
+	double DistanceToCover = Vec2DDistance(A, B);
+	double term = speed * speed + 2.0 * DistanceToCover * Prm.Friction;
+
+	//If (u^2 + 2as) is negative it means the ball cannot reach point B.
+	if (term <= 0.0) return -1.0;
+
+	double v = sqrt(term);
+
+	//It is possible for the ball to reach B and we know its speed when it gets there,
+	//so now it's easy to calculate the time using the equation:
+	//
+	// t = v - u
+	//     -----
+	//       a
+	return (v - speed) / Prm.Friction;
 
 }
 
@@ -201,6 +124,40 @@ void SoccerBall::TestCollisionWithWalls(const std::vector<Wall2D>& walls) {
 
 }
 
+//---------------------------------AddNoiseToKick-----------------------------------
+//
+// This can be used to vary the accuracy of a player's kick. Just call it prior to kicking
+// the ball using the ball's position and the ball target as parameters.
+//
+//-----------------------------------------------------------------------------------
+Vector2D AddNoiseToKick(Vector2D BallPos, Vector2D BallTarget) {
+
+	double displacement = (Pi - Pi * Prm.PlayerKickingAccuracy) * RandomClamped();
+	Vector2D toTarget = BallTarget - BallPos;
+	Vec2DRotateAroundOrigin(toTarget, displacement);
+	return toTarget + BallPos;
+
+}
+
+//--------------------------------------Kick---------------------------------------
+//
+// Applies a force to the ball in the direction of heading. Truncates the new 
+// velocity to make sure it doesn't exceed the max allowable.
+//
+//----------------------------------------------------------------------------------
+void SoccerBall::Kick(Vector2D direction, double force) {
+
+	//Ensure direction is normalized
+	direction.Normalize();
+
+	//Calculate the acceleration
+	Vector2D acceleration = (direction * force) / m_dMass;
+
+	//Update the velocity
+	m_vVelocity = acceleration;
+
+}
+
 //--------------------------------PlaceAtLocation----------------------------------
 //
 // Positions the ball at the desired location and sets the ball's velocity to zero.
@@ -211,5 +168,49 @@ void SoccerBall::PlaceAtPosition(Vector2D NewPos) {
 	m_vPosition = NewPos;
 	m_vOldPos = m_vPosition;
 	m_vVelocity.Zero();
+
+}
+
+//-------------------------------------Update--------------------------------------
+//
+// Updates the ball physics, tests for any collisions and adjusts the ball's velocity accordingly
+//
+//----------------------------------------------------------------------------------
+void SoccerBall::Update() {
+
+	//Keep a record of the old position so the goal::scored method can used it for goal testing
+	m_vOldPos = m_vPosition;
+
+	//Tests for collisions
+	TestCollisionWithWalls(m_PitchBoundary);
+
+	//Simulate Prm.Friction. Make sure the speed is positive
+	if (m_vVelocity.LengthSq() > Prm.Friction * Prm.Friction) {
+
+		m_vVelocity += Vec2DNormalize(m_vVelocity) * Prm.Friction;
+		m_vPosition += m_vVelocity;
+
+		//Update heading
+		m_vHeading = Vec2DNormalize(m_vVelocity);
+
+	}
+
+}
+
+
+//-------------------------------------Render--------------------------------------
+//
+// Renders the ball
+//
+//----------------------------------------------------------------------------------
+void SoccerBall::Render() {
+
+	gdi->BlackBrush();
+	gdi->Circle(m_vPosition, m_dBoundingRadius);
+
+	/*
+	gdi->GreenBush();
+	for (int i = 0; i < IPPoints.size(); ++i) gdi->Circle(IPPoints[i], 3);
+	*/
 
 }

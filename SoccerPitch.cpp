@@ -136,9 +136,7 @@ bool SoccerPitch::Render() {
 
 	//Render regions.
 	if (Prm.bRegions) {
-
 		for (unsigned int r = 0; r < m_Regions.size(); ++r) m_Regions[r]->Render(true);
-
 	}
 
 	//Render the goals.

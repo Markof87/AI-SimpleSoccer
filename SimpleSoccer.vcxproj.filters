@@ -98,5 +98,8 @@
     <ClCompile Include="TeamStates.cpp">
       <Filter>File di origine</Filter>
     </ClCompile>
+    <ClCompile Include="FieldPlayer.cpp">
+      <Filter>File di origine</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

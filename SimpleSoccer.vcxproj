@@ -164,6 +164,7 @@
     <ClInclude Include="TeamStates.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="FieldPlayer.cpp" />
     <ClCompile Include="FieldPlayerStates.cpp" />
     <ClCompile Include="Goalkeeper.cpp" />
     <ClCompile Include="GoalkeeperStates.cpp" />

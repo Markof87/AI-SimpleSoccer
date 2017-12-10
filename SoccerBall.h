@@ -23,7 +23,10 @@ private:
 	//Keeps a record of the ball's position at the last update.
 	Vector2D m_vOldPos;
 
-	//A local reference to the Walls that make up the pitch boundary.
+	//A pointer to the player (or goalkeeper) who possessed the ball.
+	PlayerBase* m_pOwner;
+
+	//A local reference to the Walls that make up the pitch boundary (used in the collision detection).
 	const std::vector<Wall2D>& m_PitchBoundary;
 
 public:

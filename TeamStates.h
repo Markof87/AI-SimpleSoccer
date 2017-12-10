@@ -14,14 +14,14 @@
 class SoccerTeam;
 
 //-----------------------------------------------------------------------
-class Attacking : public State<SoccerTeam> {
+class PrepareForKickOff : public State<SoccerTeam> {
 
 private:
-	Attacking(){}
+	PrepareForKickOff() {}
 
 public:
 	//Singleton
-	static Attacking* Instance();
+	static PrepareForKickOff* Instance();
 	void Enter(SoccerTeam* keeper) {}
 	void Execute(SoccerTeam* keeper) {}
 	void Exit(SoccerTeam* keeper) {}
@@ -46,14 +46,14 @@ public:
 };
 
 //-----------------------------------------------------------------------
-class PrepareForKickOff : public State<SoccerTeam> {
+class Attacking : public State<SoccerTeam> {
 
 private:
-	PrepareForKickOff() {}
+	Attacking(){}
 
 public:
 	//Singleton
-	static PrepareForKickOff* Instance();
+	static Attacking* Instance();
 	void Enter(SoccerTeam* keeper) {}
 	void Execute(SoccerTeam* keeper) {}
 	void Exit(SoccerTeam* keeper) {}
