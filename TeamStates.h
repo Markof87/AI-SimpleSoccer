@@ -22,9 +22,9 @@ private:
 public:
 	//Singleton
 	static PrepareForKickOff* Instance();
-	void Enter(SoccerTeam* keeper) {}
-	void Execute(SoccerTeam* keeper) {}
-	void Exit(SoccerTeam* keeper) {}
+	void Enter(SoccerTeam* keeper);
+	void Execute(SoccerTeam* keeper);
+	void Exit(SoccerTeam* keeper);
 	bool OnMessage(SoccerTeam*, const Telegram&) { return false; }
 
 };
@@ -38,9 +38,9 @@ private:
 public:
 	//Singleton
 	static Defending* Instance();
-	void Enter(SoccerTeam* keeper) {}
-	void Execute(SoccerTeam* keeper) {}
-	void Exit(SoccerTeam* keeper) {}
+	void Enter(SoccerTeam* keeper);
+	void Execute(SoccerTeam* keeper);
+	void Exit(SoccerTeam* keeper);
 	bool OnMessage(SoccerTeam*, const Telegram&) { return false; }
 
 };
@@ -54,9 +54,9 @@ private:
 public:
 	//Singleton
 	static Attacking* Instance();
-	void Enter(SoccerTeam* keeper) {}
-	void Execute(SoccerTeam* keeper) {}
-	void Exit(SoccerTeam* keeper) {}
+	void Enter(SoccerTeam* keeper);
+	void Execute(SoccerTeam* keeper);
+	void Exit(SoccerTeam* keeper);
 	bool OnMessage(SoccerTeam*, const Telegram&) { return false; }
 
 };

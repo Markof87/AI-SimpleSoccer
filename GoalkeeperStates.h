@@ -23,9 +23,9 @@ private:
 public:
 	//Singleton.
 	static GoalKeeperState* Instance();
-	void Enter(GoalKeeper* keeper){}
-	void Execute(GoalKeeper* keeper) {}
-	void Exit(GoalKeeper* keeper) {}
+	void Enter(GoalKeeper* keeper) {};
+	void Execute(GoalKeeper* keeper) {};
+	void Exit(GoalKeeper* keeper) {};
 	bool OnMessage(GoalKeeper*, const Telegram&);
 
 };
@@ -39,9 +39,9 @@ private:
 public:
 	//Singleton.
 	static TendGoal* Instance();
-	void Enter(GoalKeeper* keeper) {}
-	void Execute(GoalKeeper* keeper) {}
-	void Exit(GoalKeeper* keeper) {}
+	void Enter(GoalKeeper* keeper);
+	void Execute(GoalKeeper* keeper);
+	void Exit(GoalKeeper* keeper);
 	bool OnMessage(GoalKeeper*, const Telegram&) { return false; }
 };
 
@@ -54,9 +54,9 @@ private:
 public:
 	//Singleton.
 	static InterceptBall* Instance();
-	void Enter(GoalKeeper* keeper) {}
-	void Execute(GoalKeeper* keeper) {}
-	void Exit(GoalKeeper* keeper) {}
+	void Enter(GoalKeeper* keeper);
+	void Execute(GoalKeeper* keeper);
+	void Exit(GoalKeeper* keeper);
 	bool OnMessage(GoalKeeper*, const Telegram&) { return false; }
 };
 
@@ -69,9 +69,9 @@ private:
 public:
 	//Singleton.
 	static ReturnHome* Instance();
-	void Enter(GoalKeeper* keeper) {}
-	void Execute(GoalKeeper* keeper) {}
-	void Exit(GoalKeeper* keeper) {}
+	void Enter(GoalKeeper* keeper);
+	void Execute(GoalKeeper* keeper);
+	void Exit(GoalKeeper* keeper);
 	bool OnMessage(GoalKeeper*, const Telegram&) { return false; }
 };
 
@@ -84,9 +84,9 @@ private:
 public:
 	//Singleton.
 	static PutBallBackInPlay* Instance();
-	void Enter(GoalKeeper* keeper) {}
-	void Execute(GoalKeeper* keeper) {}
-	void Exit(GoalKeeper* keeper) {}
+	void Enter(GoalKeeper* keeper);
+	void Execute(GoalKeeper* keeper);
+	void Exit(GoalKeeper* keeper) {};
 	bool OnMessage(GoalKeeper*, const Telegram&) { return false; }
 };
 

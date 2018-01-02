@@ -86,7 +86,7 @@ public:
 	bool IsAheadOfAttacker()const;
 
 	//Returns true if a player is located at the designated support spot.
-	bool AtSupportSpot()const;
+	bool AtSupportSpot()const {};
 
 	//Returns true if the player is located at his steering target.
 	bool AtTarget()const;

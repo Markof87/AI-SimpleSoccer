@@ -92,8 +92,8 @@ private:
 	std::vector<Vector2D> m_Antenna;
 
 public:
-	SteeringBehaviors(PlayerBase* agent, SoccerPitch* world, SoccerBall ball);
-	virtual ~SteeringBehaviors();
+	SteeringBehaviors(PlayerBase* agent, SoccerPitch* world, SoccerBall* ball);
+	//virtual ~SteeringBehaviors();
 
 	//Calculates and sums the steering forces from any active behaviors
 	Vector2D Calculate();
@@ -107,7 +107,7 @@ public:
 	Vector2D Force()const { return m_vSteeringForce; }
 
 	//Renders visual aids and info for seeing how each behavior is calculated
-	void RenderInfo();
+	//void RenderInfo();
 	void RenderAids();
 
 	Vector2D Target()const { return m_vTarget; }

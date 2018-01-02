@@ -26,9 +26,9 @@ public:
 	//Singleton
 	static GlobalPlayerState* Instance();
 
-	void Enter(FieldPlayer* player){}
-	void Execute(FieldPlayer* player) {}
-	void Exit(FieldPlayer* player) {}
+	void Enter(FieldPlayer* player) {};
+	void Execute(FieldPlayer* player);
+	void Exit(FieldPlayer* player) {};
 
 	bool OnMessage(FieldPlayer*, const Telegram&);
 
@@ -44,9 +44,9 @@ public:
 	//Singleton
 	static ChaseBall* Instance();
 
-	void Enter(FieldPlayer* player) {}
-	void Execute(FieldPlayer* player) {}
-	void Exit(FieldPlayer* player) {}
+	void Enter(FieldPlayer* player);
+	void Execute(FieldPlayer* player);
+	void Exit(FieldPlayer* player);
 
 	bool OnMessage(FieldPlayer*, const Telegram&) { return false; }
 
@@ -62,9 +62,9 @@ public:
 	//Singleton
 	static Wait* Instance();
 
-	void Enter(FieldPlayer* player) {}
-	void Execute(FieldPlayer* player) {}
-	void Exit(FieldPlayer* player) {}
+	void Enter(FieldPlayer* player);
+	void Execute(FieldPlayer* player);
+	void Exit(FieldPlayer* player);
 
 	bool OnMessage(FieldPlayer*, const Telegram&) { return false; }
 
@@ -80,9 +80,9 @@ public:
 	//Singleton
 	static ReceiveBall* Instance();
 
-	void Enter(FieldPlayer* player) {}
-	void Execute(FieldPlayer* player) {}
-	void Exit(FieldPlayer* player) {}
+	void Enter(FieldPlayer* player);
+	void Execute(FieldPlayer* player);
+	void Exit(FieldPlayer* player);
 
 	bool OnMessage(FieldPlayer*, const Telegram&) { return false; }
 
@@ -98,9 +98,9 @@ public:
 	//Singleton
 	static KickBall* Instance();
 
-	void Enter(FieldPlayer* player) {}
-	void Execute(FieldPlayer* player) {}
-	void Exit(FieldPlayer* player) {}
+	void Enter(FieldPlayer* player);
+	void Execute(FieldPlayer* player);
+	void Exit(FieldPlayer* player) {};
 
 	bool OnMessage(FieldPlayer*, const Telegram&) { return false; }
 
@@ -116,9 +116,9 @@ public:
 	//Singleton
 	static Dribble* Instance();
 
-	void Enter(FieldPlayer* player) {}
-	void Execute(FieldPlayer* player) {}
-	void Exit(FieldPlayer* player) {}
+	void Enter(FieldPlayer* player);
+	void Execute(FieldPlayer* player);
+	void Exit(FieldPlayer* player) {};
 
 	bool OnMessage(FieldPlayer*, const Telegram&) { return false; }
 
@@ -134,9 +134,9 @@ public:
 	//Singleton
 	static SupportAttacker* Instance();
 
-	void Enter(FieldPlayer* player) {}
-	void Execute(FieldPlayer* player) {}
-	void Exit(FieldPlayer* player) {}
+	void Enter(FieldPlayer* player);
+	void Execute(FieldPlayer* player);
+	void Exit(FieldPlayer* player);
 
 	bool OnMessage(FieldPlayer*, const Telegram&) { return false; }
 
@@ -152,9 +152,9 @@ public:
 	//Singleton
 	static ReturnToHomeRegion* Instance();
 
-	void Enter(FieldPlayer* player) {}
-	void Execute(FieldPlayer* player) {}
-	void Exit(FieldPlayer* player) {}
+	void Enter(FieldPlayer* player);
+	void Execute(FieldPlayer* player);
+	void Exit(FieldPlayer* player);
 
 	bool OnMessage(FieldPlayer*, const Telegram&) { return false; }
 

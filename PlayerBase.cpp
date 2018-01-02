@@ -21,7 +21,7 @@ PlayerBase::~PlayerBase() {
 }
 
 PlayerBase::PlayerBase(SoccerTeam* home_team, int home_region, Vector2D heading, Vector2D velocity, double mass, double max_force, double max_speed, double max_turn_rate, double scale, player_role role) :
-	MovingEntity(home_team->Pitch()->GetRegionFromIndex(home_region)->Center(), scale*10.0, velocity, max_speed, heading, mass, Vector2D(scale, scale), max_turn_rate, max_force, m_pTeam(home_team), m_dDistSqToBall(MaxFloat), m_iHomeRegion(home_region), m_iDefaultRegion(home_region), m_PlayerRole(role)) {
+	MovingEntity(home_team->Pitch()->GetRegionFromIndex(home_region)->Center(), scale*10.0, velocity, max_speed, heading, mass, Vector2D(scale, scale), max_turn_rate, max_force), m_pTeam(home_team), m_dDistSqToBall(MaxFloat), m_iHomeRegion(home_region), m_iDefaultRegion(home_region), m_PlayerRole(role) {
 
 	//Setup the vertex buffers and calculate the bounding radius
 	const int NumPlayerVerts = 4;
@@ -173,7 +173,7 @@ bool PlayerBase::InHotRegion()const {
 }
 
 bool PlayerBase::IsAheadOfAttacker()const {
-	return fabs(Pos().x - Team()->OpponentsGoal()->Center().x) < fabs(Team()->ControllingPlayer() - Pos().x - Team()->OpponentsGoal()->Center().x);
+	return fabs(Pos().x - Team()->OpponentsGoal()->Center().x) < fabs(Team()->ControllingPlayer()->Pos().x - Team()->OpponentsGoal()->Center().x);
 }
 
 SoccerBall* const PlayerBase::Ball()const {

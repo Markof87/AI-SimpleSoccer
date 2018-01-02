@@ -10,7 +10,7 @@
 using std::string;
 using std::vector;
 
-SteeringBehaviors::SteeringBehaviors(PlayerBase* agent, SoccerPitch* world, SoccerBall ball):
+SteeringBehaviors::SteeringBehaviors(PlayerBase* agent, SoccerPitch* world, SoccerBall* ball):
 	m_pPlayer(agent),m_iFlags(0),m_dMultSeparation(Prm.SeparationCoefficient),m_bTagged(false),m_dViewDistance(Prm.ViewDistance),m_pBall(ball),m_dInterposeDist(0.0),m_Antenna(5,Vector2D()){}
 
 //------------------------------------AccumulateForce--------------------------------------

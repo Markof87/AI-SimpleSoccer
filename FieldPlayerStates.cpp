@@ -289,7 +289,7 @@ void ReceiveBall::Execute(FieldPlayer* player) {
 
 	}
 
-	if (player->Steering()->PursuitIsOn()) player->Steering()->SetTarget(player->Ball()->Pos());
+	if (player->Steering()->IsPursuitOn()) player->Steering()->SetTarget(player->Ball()->Pos());
 
 	//If the player has 'arrived' at the steering target he should wait and turn to face the ball.
 	if (player->AtTarget()) {
@@ -370,7 +370,7 @@ void KickBall::Execute(FieldPlayer* player) {
 
 		//Add some noise to the kick. We don't want players who are too accurate! 
 		//The amount of noise can be adjusted by altering Prm.PlayerKickingAccuracy.
-		BallTarget = AddNoiseToKick(player->Ball()->Pos(), BallTarget);
+		BallTarget = player->Ball()->AddNoiseToKick(player->Ball()->Pos(), BallTarget);
 
 		//This is the direction the ball will be kicked in.
 		Vector2D KickDirection = BallTarget - player->Ball()->Pos();
@@ -396,7 +396,7 @@ void KickBall::Execute(FieldPlayer* player) {
 	if (player->IsThreatened() && player->Team()->FindPass(player, receiver, BallTarget, power, Prm.MinPassDist)) {
 
 		//Add some noise to the kick.
-		BallTarget = AddNoiseToKick(player->Ball()->Pos(), BallTarget);
+		BallTarget = player->Ball()->AddNoiseToKick(player->Ball()->Pos(), BallTarget);
 
 		//This is the direction the ball will be kicked in.
 		Vector2D KickDirection = BallTarget - player->Ball()->Pos();

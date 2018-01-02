@@ -60,6 +60,9 @@
     <ClInclude Include="TeamStates.h">
       <Filter>File di intestazione</Filter>
     </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>File di intestazione</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SoccerPitch.cpp">
@@ -99,6 +102,9 @@
       <Filter>File di origine</Filter>
     </ClCompile>
     <ClCompile Include="FieldPlayer.cpp">
+      <Filter>File di origine</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
       <Filter>File di origine</Filter>
     </ClCompile>
   </ItemGroup>

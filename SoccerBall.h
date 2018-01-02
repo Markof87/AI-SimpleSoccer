@@ -43,6 +43,8 @@ public:
 	//Implement base class Render
 	void Render();
 
+	Vector2D AddNoiseToKick(Vector2D BallPos, Vector2D BallTarget);
+
 	//A soccer ball doesn't need to handle messages
 	bool HandleMessage(const Telegram& msg) { return false; }
 

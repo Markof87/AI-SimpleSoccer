@@ -130,7 +130,7 @@ void SoccerBall::TestCollisionWithWalls(const std::vector<Wall2D>& walls) {
 // the ball using the ball's position and the ball target as parameters.
 //
 //-----------------------------------------------------------------------------------
-Vector2D AddNoiseToKick(Vector2D BallPos, Vector2D BallTarget) {
+Vector2D SoccerBall::AddNoiseToKick(Vector2D BallPos, Vector2D BallTarget) {
 
 	double displacement = (Pi - Pi * Prm.PlayerKickingAccuracy) * RandomClamped();
 	Vector2D toTarget = BallTarget - BallPos;
